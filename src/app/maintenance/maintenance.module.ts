@@ -8,13 +8,15 @@ import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PartMasterComponent } from './pages/part-master/part-master.component';
 import { ProductModelMasterComponent } from './pages/product-model-master/product-model-master.component';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { ZoneMasterComponent } from './pages/zone-master/zone-master.component'
 
 @NgModule({
   declarations: [
     GroupMasterComponent,
     PartMasterComponent,
-    ProductModelMasterComponent
+    ProductModelMasterComponent,
+    ZoneMasterComponent
   ],
   exports: [
     GroupMasterComponent,
