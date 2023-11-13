@@ -9,14 +9,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PartMasterComponent } from './pages/part-master/part-master.component';
 import { ProductModelMasterComponent } from './pages/product-model-master/product-model-master.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ZoneMasterComponent } from './pages/zone-master/zone-master.component'
+import { ZoneMasterComponent } from './pages/zone-master/zone-master.component';
+import { UserMasterComponent } from './pages/user-master/user-master.component';
+import { TagMasterComponent } from './pages/tag-master/tag-master.component'
 
 @NgModule({
   declarations: [
     GroupMasterComponent,
     PartMasterComponent,
     ProductModelMasterComponent,
-    ZoneMasterComponent
+    ZoneMasterComponent,
+    UserMasterComponent,
+    TagMasterComponent
   ],
   exports: [
     GroupMasterComponent,

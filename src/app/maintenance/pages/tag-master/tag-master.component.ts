@@ -8,13 +8,14 @@ import { PartsService } from '../../service/parts.service';
 import { PARTMASTERTABLEDATA } from '../../data/part-master-table-data';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ZoneMasterService } from '../../service/zone-master/zone-master.service';
+import { TagsMasterService } from '../../service/tags-master/tags-master.service';
 
 @Component({
-  selector: 'app-zone-master',
-  templateUrl: './zone-master.component.html',
-  styleUrls: ['./zone-master.component.scss']
+  selector: 'app-tag-master',
+  templateUrl: './tag-master.component.html',
+  styleUrls: ['./tag-master.component.scss']
 })
-export class ZoneMasterComponent {
+export class TagMasterComponent {
   // partMasterTable$: Observable<PartMasterTableInterface[]>;
   filter = new FormControl('', { nonNullable: true });
 
@@ -26,7 +27,7 @@ export class ZoneMasterComponent {
   length: number = NaN;
   code_id: number = NaN;
 
-  zone: any[] = [];
+  tags: any[] = [];
   parts: any[] = [];
 
   newParts: any[] = [];
@@ -40,6 +41,7 @@ export class ZoneMasterComponent {
     private formBuilder: FormBuilder,
     private zoneService: ZoneMasterService,
     private partsService: PartsService,
+    private tagsService: TagsMasterService,
   ) {
     // this.partMasterTable$ = this.filter.valueChanges.pipe(
     // 	startWith(''),
@@ -51,24 +53,24 @@ export class ZoneMasterComponent {
 
   ngOnInit() {
     this.getAllZone()
-    this.getAllParts()
+    this.getAllTags()
   }
 
   ngAfterViewInit(): void {
   }
 
   getAllZone() {
-    this.zoneService.loadParts().subscribe((res: any) => {
-      this.zone = res.data.zone
+    this.tagsService.loadParts().subscribe((res: any) => {
+      this.tags = res.data.tags
       this.length = res.length;
       this.code += this.length
 
-      console.log(this.zone)
+      console.log(this.tags)
     })
   }
 
-  getAllParts() {
-    this.partsService.loadParts().subscribe((res: any) => {
+  getAllTags() {
+    this.tagsService.loadParts().subscribe((res: any) => {
       this.parts = res.data.parts
     })
   }

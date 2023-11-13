@@ -40,19 +40,19 @@
     <thead>
       <tr>
         <th scope="col">Select</th>
-        <th scope="col">Zone Name</th>
-        <th scope="col">Zone ID</th>
-        <th scope="col">Parts ID / Part Name</th>
+        <th scope="col">Tag ID</th>
+        <th scope="col">Tag Serial Number</th>
+        <th scope="col">Assigned User</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let zone of zone">
+      <tr *ngFor="let tag of tags">
         <th scope="row">
-          <input type="checkbox" [checked]="isSelected(zone._id)" (change)="onCheckboxChange($event, zone._id)">
+          <input type="checkbox" [checked]="isSelected(tag._id)" (change)="onCheckboxChange($event, tag._id)">
         </th>
-        <td><ngb-highlight [result]="zone.name" [term]="filter.value"></ngb-highlight></td>
-        <td><ngb-highlight [result]="'P0' + zone.code" [term]="filter.value"></ngb-highlight></td>
-        <td><ngb-highlight [result]="zone.partCodeAndName" [term]="filter.value"></ngb-highlight></td>
+        <td><ngb-highlight [result]="tag.code" [term]="filter.value"></ngb-highlight></td>
+        <td><ngb-highlight [result]="tag.serial" [term]="filter.value"></ngb-highlight></td>
+        <td><ngb-highlight [result]="tag.assignedUser" [term]="filter.value"></ngb-highlight></td>
       </tr>
     </tbody>
   </table>

@@ -21,7 +21,7 @@
   <div class="mt-3 d-flex justify-content-between">
     <div class="d-flex gap-2">
       <app-button [backgroundColor]="'lightgreen'" (click)="openLg(content)">Add</app-button>
-      <app-button [backgroundColor]="'lightyellow'" (click)="openLg(edit)" >Edit</app-button>
+      <app-button [backgroundColor]="'lightyellow'" (click)="openLg(edit)">Edit</app-button>
       <app-button [backgroundColor]="'red'" (click)="deleteZone()">Delete</app-button>
       <app-button [backgroundColor]="'lightblue'">Access</app-button>
     </div>
@@ -40,19 +40,19 @@
     <thead>
       <tr>
         <th scope="col">Select</th>
-        <th scope="col">Zone Name</th>
-        <th scope="col">Zone ID</th>
-        <th scope="col">Parts ID / Part Name</th>
+        <th scope="col">Tag ID</th>
+        <th scope="col">Tag Serial Number</th>
+        <th scope="col">Assigned User</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let zone of zone">
+      <tr *ngFor="let tag of tags">
         <th scope="row">
-          <input type="checkbox" [checked]="isSelected(zone._id)" (change)="onCheckboxChange($event, zone._id)">
+          <input type="checkbox" [checked]="isSelected(tag._id)" (change)="onCheckboxChange($event, tag._id)">
         </th>
-        <td><ngb-highlight [result]="zone.name" [term]="filter.value"></ngb-highlight></td>
-        <td><ngb-highlight [result]="'P0' + zone.code" [term]="filter.value"></ngb-highlight></td>
-        <td><ngb-highlight [result]="zone.partCodeAndName" [term]="filter.value"></ngb-highlight></td>
+        <td><ngb-highlight [result]="tag.code" [term]="filter.value"></ngb-highlight></td>
+        <td><ngb-highlight [result]="tag.serial" [term]="filter.value"></ngb-highlight></td>
+        <td><ngb-highlight [result]="tag.assignedUser" [term]="filter.value"></ngb-highlight></td>
       </tr>
     </tbody>
   </table>
@@ -81,7 +81,8 @@
         <div class="d-flex justify-content-between align-items-center mt-2">
           <p class="fw-bold">Part:</p>
           <select formControlName="partCodeAndName">
-            <option [value]="part.code + ' / ' + part.name " *ngFor="let part of parts">{{ part.code + ' / ' + part.name }}</option>
+            <option [value]="part.code + ' / ' + part.name " *ngFor="let part of parts">{{ part.code + ' / ' + part.name
+              }}</option>
           </select>
         </div>
         <p class="mt-3 text-danger">* Required Items</p>
@@ -95,37 +96,38 @@
     </form>
   </ng-template>
 
-    <ng-template #edit let-modal>
-      <form>
-        <div class="modal-header">
-          <h4 class="modal-title">Edit Zone</h4>
-          <button type="button" class="btn-close me-1" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-        </div>
-        <div class="modal-body">
-          <p>Fill out neccesary information to edit zone</p>
-          <div class="d-flex justify-content-between align-items-center mt-3">
-            <p class="fw-bold">Zone ID:</p>
-            <div>
-              {{ 'P00' + this.code }}
-            </div>
+  <ng-template #edit let-modal>
+    <form>
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Zone</h4>
+        <button type="button" class="btn-close me-1" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <p>Fill out neccesary information to edit zone</p>
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <p class="fw-bold">Zone ID:</p>
+          <div>
+            {{ 'P00' + this.code }}
           </div>
-          <div class="d-flex justify-content-between align-items-center mt-2">
-            <p class="fw-bold">Zone Name:</p>
-            <input class="group-name-input" type="text">
-          </div>
-          <div class="d-flex justify-content-between align-items-center mt-2">
-            <p class="fw-bold">Part:</p>
-            <select>
-              <option [value]="part.code + ' / ' + part.name " *ngFor="let part of parts">{{ part.code + ' / ' + part.name }}
-              </option>
-            </select>
-          </div>
-          <p class="mt-3 text-danger">* Required Items</p>
         </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-light">Save and close</button>
-          <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        <div class="d-flex justify-content-between align-items-center mt-2">
+          <p class="fw-bold">Zone Name:</p>
+          <input class="group-name-input" type="text">
         </div>
-      </form>
-    </ng-template>
+        <div class="d-flex justify-content-between align-items-center mt-2">
+          <p class="fw-bold">Part:</p>
+          <select>
+            <option [value]="part.code + ' / ' + part.name " *ngFor="let part of parts">{{ part.code + ' / ' + part.name
+              }}
+            </option>
+          </select>
+        </div>
+        <p class="mt-3 text-danger">* Required Items</p>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-light">Save and close</button>
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+      </div>
+    </form>
+  </ng-template>
 </main>

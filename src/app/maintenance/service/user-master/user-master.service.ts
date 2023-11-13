@@ -5,23 +5,23 @@ import { Constants } from 'src/app/shared/constants/constant';
 @Injectable({
   providedIn: 'root'
 })
-export class PartsService {
+export class UserMasterService {
   constructor(
     private http:HttpClient
   ) { }
 
-  readonly partsUrl = Constants.development.apiUrl.parts;
+  readonly tagsUrl = Constants.development.apiUrl.tags;
 
   loadParts(){
-    return this.http.get(this.partsUrl);
+    return this.http.get(this.tagsUrl);
   }
   // https://denso-backend.onrender.com/api/geo/v1/parts
 
   postParts(data: any){
-    return this.http.post(this.partsUrl, data);
+    return this.http.post(this.tagsUrl, data);
   }
 
   deleteParts(_id: any){
-    return this.http.delete(this.partsUrl, _id)
+    return this.http.delete(this.tagsUrl, _id)
   }
 }

@@ -4,9 +4,9 @@ import { FormArray, FormControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, map, startWith } from 'rxjs';
 import { PartMasterTableInterface } from '../../model/part-master-table-interface';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { PartsService } from '../../service/parts.service';
 import { PARTMASTERTABLEDATA } from '../../data/part-master-table-data';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 // function search(text: string, pipe: PipeTransform): PartMasterTableInterface[] {
 // 	return PARTMASTERTABLEDATA.filter((part) => {
