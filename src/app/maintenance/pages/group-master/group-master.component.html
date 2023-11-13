@@ -1,0 +1,129 @@
+<main class="p-3">
+    <h1 class="fs-3 fw-bold">Maintenance - Group Master</h1>
+
+    <div class="select-name mt-3">
+        <span>Group Name:</span>
+        <span class="fw-bold ass-name">
+            Guiller Garcia
+        </span>
+        <app-dropdown
+        [options]="['Day Shift', 'Night Shift']"
+        ></app-dropdown>
+    </div>
+    
+    <div class="select-name mt-3">
+        <span>Group ID:</span>
+        <span class="fw-bold ass-name">
+            123456789
+        </span>
+        <app-dropdown
+        [options]="['Z0001/painting', 'Z0002/painting']"
+        ></app-dropdown>
+    </div>
+
+    <div class="mt-3 d-flex justify-content-between">
+        <div class="d-flex gap-2">
+            <app-button [backgroundColor]="'lightgreen'" (click)="openLg(content)">Add</app-button>
+            <app-button [backgroundColor]="'lightyellow'">Edit</app-button>
+            <app-button [backgroundColor]="'red'">Delete</app-button>
+            <app-button [backgroundColor]="'lightblue'">Access</app-button>
+        </div>
+
+        <form>
+            <div class="mb-3 row">
+                <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Full text search:</label>
+                <div class="col-xs-3 col-sm-auto">
+                    <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter" />
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Select</th>
+                <th scope="col">Group Name</th>
+                <th scope="col">Group ID</th>
+                <th scope="col">Zone #1</th>
+                <th scope="col">Zone #2</th>
+                <th scope="col">Zone #3</th>
+                <th scope="col">Zone #4</th>
+                <th scope="col">Zone #5</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let group of groupMasterTable$ | async; index as i">
+                <th scope="row">
+                    <input type="checkbox">
+                </th>
+                <td><ngb-highlight [result]="group.name" [term]="filter.value"></ngb-highlight></td>
+                <td><ngb-highlight [result]="group.id | number" [term]="filter.value"></ngb-highlight></td>
+                <td><ngb-highlight [result]="group.zone1" [term]="filter.value"></ngb-highlight></td>
+                <td><ngb-highlight [result]="group.zone2" [term]="filter.value"></ngb-highlight></td>
+                <td><ngb-highlight [result]="group.zone3" [term]="filter.value"></ngb-highlight></td>
+                <td><ngb-highlight [result]="group.zone4" [term]="filter.value"></ngb-highlight></td>
+                <td><ngb-highlight [result]="group.zone5" [term]="filter.value"></ngb-highlight></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ng-template #content let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title">New Group</h4>
+            <button type="button" class="btn-close me-1" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+            <p>Fill out neccesary information to add a group</p>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <p class="fw-bold">Group ID:</p>
+                G0007
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+                <p class="fw-bold">Group Name:</p>
+                <input class="group-name-input" type="text">
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+                <p class="fw-bold">Zone #1:</p>
+                <app-dropdown
+                [width]="'20rem'"
+                [options]="['Z0001/painting', 'Z0002/packing']"
+                ></app-dropdown>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+                <p class="fw-bold">Zone #2:</p>
+                <app-dropdown
+                [width]="'20rem'"
+                [options]="['Z0001/painting', 'Z0002/packing']"
+                ></app-dropdown>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+                <p class="fw-bold">Zone #3:</p>
+                <app-dropdown
+                [width]="'20rem'"
+                [options]="['Z0001/painting', 'Z0002/packing']"
+                ></app-dropdown>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+                <p class="fw-bold">Zone #4:</p>
+                <app-dropdown
+                [width]="'20rem'"
+                [options]="['Z0001/painting', 'Z0002/packing']"
+                ></app-dropdown>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+                <p class="fw-bold">Zone #5:</p>
+                <app-dropdown
+                [width]="'20rem'"
+                [options]="['Z0001/painting', 'Z0002/packing']"
+                ></app-dropdown>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light" onclick="addAndClose()">Add and close</button>
+            <button type="button" class="btn btn-light">Add and continue</button>
+            <button type="button" class="btn btn-light">Clear</button>
+            <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        </div>
+    </ng-template>
+</main>

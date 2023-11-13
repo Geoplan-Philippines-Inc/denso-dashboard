@@ -1,0 +1,13 @@
+.sidebar{
+    height: 95vh;
+    border-right: 1px solid rgba($color: #ccc, $alpha: .5);
+}
+
+.sidebar ul li{
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar .sidebar-container{
+    width: 150px;
+}

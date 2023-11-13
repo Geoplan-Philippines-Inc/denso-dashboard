@@ -1,0 +1,289 @@
+<main class="p-3">
+    <h1 class="fs-3 fw-bold">Reports - Yamazumi Hyou per Associate</h1>
+
+    <div class="select-week my-3">
+        <span>Select a week: </span>
+        <span class="calendar" (click)="datepicker.toggle()">
+            <i class="bi bi-calendar-event"></i>
+        </span>
+
+        <div class="filter">
+            <div>
+                <div class="input-group">
+                    <input
+                        name="datepicker"
+                        class="calendar-input"
+                        ngbDatepicker
+                        #datepicker="ngbDatepicker"
+                        [autoClose]="'outside'"
+                        (dateSelect)="onDateSelection($event)"
+                        [displayMonths]="2"
+                        [dayTemplate]="t"
+                        outsideDays="hidden"
+                        [startDate]="fromDate!"
+                        tabindex="-1"
+                    />
+                    <ng-template #t let-date let-focused="focused">
+                        <span
+                            class="custom-day"
+                            [class.focused]="focused"
+                            [class.range]="isRange(date)"
+                            [class.faded]="isHovered(date) || isInside(date)"
+                            (mouseenter)="hoveredDate = date"
+                            (mouseleave)="hoveredDate = null"
+                        >
+                            {{ date.day }}
+                        </span>
+                    </ng-template>
+                </div>
+            </div>
+
+            <table>
+                <tr>
+                    <th>Start Date</th>
+                    <td> {{ formatter.format(fromDate) }} </td>
+                    <th>End Date</th>
+                    <td> {{ formatter.format(toDate) }} </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="select-name">
+        <span>Associate Name:</span>
+        <span class="fw-bold ass-name">
+            Guiller Garcia
+        </span>
+        <span>Shift Type:</span>
+        <app-dropdown
+        [options]="['Day Shift', 'Night Shift']"
+        ></app-dropdown>
+
+        <button class="search" (click)="toggleGraph()">Search</button>
+    </div>
+
+    <ng-container *ngIf="isVisible">
+        <p class="fw-bold text-primary my-3 text-center">Showing Results between 2023/5/1 to 2023/5/7</p>
+        <div class="bar-container">
+        <div class="container" style="width: 100%;">
+            <table id="q-graph">
+                <tbody>
+                    <tr class="qtr" id="q1">
+                        <th scope="row">04/30/23 (Mon)</th>
+                        <td class="sent bar" style="height: 100px;">
+                            <p>PICK UP PARTS</p>
+                        </td>
+                        <td class="sent-2 bar" style="height: 40px;">
+                            <p>PACKING</p>
+                        </td>
+                        <td class="sent-3 bar" style="height: 90px;">
+                            <p>UNLOAD PARTS</p>
+                        </td>
+                        <td class="sent-4 bar" style="height: 204px;">
+                            <p>SHIPPING</p>
+                        </td>
+                        <td class="others others-1 bar" style="height: 74px;">
+                            <p>OTHERS</p>
+                        </td>
+                        
+                        <td class="paid paid-1 bar" style="height: 100px;">
+                            <p>PICK UP PARTS</p>
+                        </td>
+                        <td class="paid paid-2 bar" style="height: 90px;">
+                            <p>UNLOAD PARTS</p>
+                        </td>
+                        <td class="paid paid-3 bar" style="height: 90px;">
+                            <p>SHIPPING</p>
+                        </td>
+                        <td class="paid paid-4 bar" style="height: 200px;">
+                            <p>PACKING</p>
+                        </td>
+                    </tr>
+                    <tr class="qtr" id="q2">
+                        <th scope="row">05/01/23 (Tue)</th>
+                        <td class="sent bar" style="height: 100px;">
+                            <p>PICK UP PARTS</p>
+                        </td>
+                        <td class="sent-2 bar" style="height: 40px;">
+                            <p>PACKING</p>
+                        </td>
+                        <td class="sent-3 bar" style="height: 90px;">
+                            <p>UNLOAD PARTS</p>
+                        </td>
+                        <td class="sent-4 bar" style="height: 174px;">
+                            <p>SHIPPING</p>
+                        </td>
+                        <td class="others others-2 bar" style="height: 74px;">
+                            <p>OTHERS</p>
+                        </td>
+
+                        <td class="paid paid-1 bar" style="height: 100px;">
+                            <p>PICK UP PARTS</p>
+                        </td>
+                        <td class="paid paid-2 bar" style="height: 90px;">
+                            <p>UNLOAD PARTS</p>
+                        </td>
+                        <td class="paid paid-3 bar" style="height: 90px;">
+                            <p>SHIPPING</p>
+                        </td>
+                        <td class="paid paid-4 bar" style="height: 200px;">
+                            <p>PACKING</p>
+                        </td>
+                    </tr>
+                    <tr class="qtr" id="q3">
+                        <th scope="row">05/02/23 (Wed)</th>
+                        <td class="sent bar" style="height: 100px;">
+                            <p>PICK UP PARTS</p>
+                        </td>
+                        <td class="sent-2 bar" style="height: 40px;">
+                            <p>PACKING</p>
+                        </td>
+                        <td class="sent-3 bar" style="height: 90px;">
+                            <p>UNLOAD PARTS</p>
+                        </td>
+                        <td class="sent-4 bar" style="height: 174px;">
+                            <p>SHIPPING</p>
+                        </td>
+                        <td class="others others-2 bar" style="height: 134px;">
+                            <p>OTHERS</p>
+                        </td>
+                        
+                        <td class="paid paid-1 bar" style="height: 100px;">
+                            <p>PICK UP PARTS</p>
+                        </td>
+                        <td class="paid paid-2 bar" style="height: 90px;">
+                            <p>UNLOAD PARTS</p>
+                        </td>
+                        <td class="paid paid-3 bar" style="height: 90px;">
+                            <p>SHIPPING</p>
+                        </td>
+                        <td class="paid paid-4 bar" style="height: 200px;">
+                            <p>PACKING</p>
+                        </td>
+                    </tr>
+                    <tr class="qtr" id="q4">
+                        <th scope="row">05/03/23 (thu)</th>
+                        <td class="sent bar" style="height: 100px;">
+                            <p>PICK UP PARTS</p>
+                        </td>
+                        <td class="sent-2 bar" style="height: 40px;">
+                            <p>PACKING</p>
+                        </td>
+                        <td class="sent-3 bar" style="height: 90px;">
+                            <p>UNLOAD PARTS</p>
+                        </td>
+                        <td class="sent-4 bar" style="height: 249px;">
+                            <p>SHIPPING</p>
+                        </td>
+                        
+                        <td class="paid paid-1 bar" style="height: 100px;">
+                            <p>PICK UP PARTS</p>
+                        </td>
+                        <td class="paid paid-2 bar" style="height: 90px;">
+                            <p>UNLOAD PARTS</p>
+                        </td>
+                        <td class="paid paid-3 bar" style="height: 90px;">
+                            <p>SHIPPING</p>
+                        </td>
+                        <td class="paid paid-4 bar" style="height: 200px;">
+                            <p>PACKING</p>
+                        </td>
+                    </tr>
+                    <tr class="qtr" id="q5">
+                        <th scope="row">05/04/23 (Fri)</th>
+                        <td class="sent bar" style="height: 100px;">
+                            <p>PICK UP PARTS</p>
+                        </td>
+                        <td class="sent-2 bar" style="height: 40px;">
+                            <p>PACKING</p>
+                        </td>
+                        <td class="sent-3 bar" style="height: 90px;">
+                            <p>UNLOAD PARTS</p>
+                        </td>
+                        <td class="sent-4 bar" style="height: 250px;">
+                            <p>SHIPPING</p>
+                        </td>
+                    
+                        <td class="paid paid-1 bar" style="height: 100px;">
+                            <p>PICK UP PARTS</p>
+                        </td>
+                        <td class="paid paid-2 bar" style="height: 90px;">
+                            <p>UNLOAD PARTS</p>
+                        </td>
+                        <td class="paid paid-3 bar" style="height: 90px;">
+                            <p>SHIPPING</p>
+                        </td>
+                        <td class="paid paid-4 bar" style="height: 200px;">
+                            <p>PACKING</p>
+                        </td>
+                    </tr>
+                    <tr class="qtr" id="q6">    
+                        <th scope="row">05/06/23 (Sat)</th>
+                        <td class="sent bar" style="height: 100px;">
+                            <p>PICK UP PARTS</p>
+                        </td>
+                        <td class="sent-2 bar" style="height: 40px;">
+                            <p>PACKING</p>
+                        </td>
+                        <td class="sent-3 bar" style="height: 90px;">
+                            <p>UNLOAD PARTS</p>
+                        </td>
+                        <td class="sent-4 bar" style="height: 134px;">
+                            <p>SHIPPING</p>
+                        </td>
+                        <td class="others others-3 bar" style="height: 104px;">
+                            <p>OTHERS</p>
+                        </td>
+                    
+                        <td class="paid paid-1 bar" style="height: 100px;">
+                            <p>PICK UP PARTS</p>
+                        </td>
+                        <td class="paid paid-2 bar" style="height: 90px;">
+                            <p>UNLOAD PARTS</p>
+                        </td>
+                        <td class="paid paid-3 bar" style="height: 90px;">
+                            <p>SHIPPING</p>
+                        </td>
+                        <td class="paid paid-4 bar" style="height: 200px;">
+                            <p>PACKING</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div id="ticks">
+                <div class="tick" style="height: 59px;">
+                    <p>10H</p>
+                </div>
+                <div class="tick" style="height: 59px;">
+                    <p>9H</p>
+                </div>
+                <div class="tick" style="height: 59px;">
+                    <p>8H</p>
+                </div>
+                <div class="tick" style="height: 59px;">
+                    <p>7H</p>
+                </div>
+                <div class="tick" style="height: 59px;">
+                    <p>6H</p>
+                </div>
+                <div class="tick" style="height: 59px;">
+                    <p>5H</p>
+                </div>
+                <div class="tick" style="height: 59px;">
+                    <p>4H</p>
+                </div>
+                <div class="tick" style="height: 59px;">
+                    <p>3H</p>
+                </div>
+                <div class="tick" style="height: 59px;">
+                    <p>2H</p>
+                </div>                
+                <div class="tick" style="height: 59px;">
+                    <p>1H</p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </ng-container>
+</main>

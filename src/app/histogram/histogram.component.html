@@ -1,0 +1,67 @@
+<main class="p-3">
+    <h1 class="fs-3 fw-bold">Reports - Histogram</h1>
+
+    <div class="select-period my-3">
+        <div class="filter">
+            <table>
+                <tr>
+                    <td>
+                        1D 
+                        <i class="bi bi-calendar-event"></i>
+                    </td>
+                    <td>
+                        1W 
+                        <i class="bi bi-calendar-event"></i>
+                    </td>
+                    <td>
+                        1M
+                        <i class="bi bi-calendar-event"></i>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="filter">
+            <table>
+                <tr>
+                    <td>Start Date</td>
+                    <th>2023/5/1(Mon)</th>
+                    <td>End Date</td>
+                    <th>2023/5/7 (Sun)</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="select-name">
+        <span>Associate Name:</span>
+        <app-dropdown
+        [options]="['(All)', 'Ace Gabriel P. Pasiliao', 'Jonas Villamar']"
+        ></app-dropdown>
+        <span>Shift Type:</span>
+        <app-dropdown
+        [options]="['Day Shift', 'Night Shift']"
+        ></app-dropdown>
+    </div>
+
+    <div class="select-name my-3">
+        <span>Work Class:</span>
+        <app-dropdown
+        [options]="['(All)', 'Ace Gabriel P. Pasiliao', 'Jonas Villamar']"
+        ></app-dropdown>
+
+        <button class="plot" (click)="toggleGraph()">
+            Plot Histogram
+        </button>
+    </div>
+
+    <ng-container *ngIf="isVisible">
+        <div style="padding: 0 10%;">
+            <p class="fw-bold text-primary my-3 text-center">Showing Results between 2023/5/1 to 2023/5/7</p>
+            
+            <canvas baseChart [data]="barChartData" [plugins]="barChartPlugins" [legend]="barChartLegend" [type]="'bar'">
+            </canvas>
+        </div>
+    </ng-container>
+
+</main>

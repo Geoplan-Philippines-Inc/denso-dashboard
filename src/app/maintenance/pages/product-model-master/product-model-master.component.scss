@@ -1,0 +1,23 @@
+.select-name {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.select-name {
+    .ass-name {
+        border: 1px solid black;
+        padding: .25rem .5rem;
+    }
+}
+
+.group-name-input{
+    width: 20rem;
+    border: 1px solid black;
+    padding: .25rem .5rem;
+}
+
+.group-name-input:focus{
+    border: 1px solid black;
+    outline: none;
+}

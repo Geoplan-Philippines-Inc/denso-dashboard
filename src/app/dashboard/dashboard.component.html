@@ -1,0 +1,35 @@
+<div>
+    <h1 class="fs-3 fw-bold">DASHBOARD</h1>
+    <h2 class="fs-5 fw-light">KPI EXPRESS OCCURANCE</h2>
+
+    <div>
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <canvas baseChart
+                    [data]="barChartData"
+                    [plugins]="barChartPlugins"
+                    [legend]="barChartLegend"
+                    [type]="'bar'">
+                </canvas>
+            </div>
+        
+            <div class="col-lg-6 col-12">
+                <canvas baseChart
+                    [data]="barChartData"
+                    [plugins]="barChartPlugins"
+                    [legend]="barChartLegend"
+                    [type]="'bar'">
+                </canvas>
+            </div>
+        
+            <div class="col-lg-6 col-12">
+                <canvas baseChart
+                    [data]="barChartData"
+                    [plugins]="barChartPlugins"
+                    [legend]="barChartLegend"
+                    [type]="'bar'">
+                </canvas>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+<main class="p-3">
+    <h1 class="fs-3 fw-bold">Reports - Yamazumi Hyou Comparison</h1>
+
+    <div class="select-period my-3">
+        <span>Select a period: </span>
+
+        <div class="filter">
+            <table>
+                <tr>
+                    <td>
+                        1D 
+                        <i class="bi bi-calendar-event"></i>
+                    </td>
+                    <td>
+                        1W 
+                        <i class="bi bi-calendar-event"></i>
+                    </td>
+                    <td>
+                        1M
+                        <i class="bi bi-calendar-event"></i>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="filter">
+            <table>
+                <tr>
+                    <td>Start Date</td>
+                    <th>2023/5/1(Mon)</th>
+                    <td>End Date</td>
+                    <th>2023/5/7 (Sun)</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="select-associates">
+        <span>Select Associates for comparison:</span>
+        <span class="associate">
+            <i class="bi bi-people-fill"></i>
+        </span>
+
+        <button class="compare" (click)="toggleGraph()">Compare</button>
+    </div>
+
+    <ng-container *ngIf="isVisible">
+        <div class="ass-list mt-3">
+            <table>
+                <tr>
+                    <th>Diola Norman</th>
+                    <th>Lopez Maria</th>
+                    <th>Ovejas Rommel</th>
+                    <th>Cinco Lemuel</th>
+                    <th>Cayanes Kurt</th>
+                </tr>
+            </table>
+        </div>
+
+        <p class="fw-bold text-primary my-3 text-center">Showing Results between 2023/5/1 to 2023/5/7</p>
+
+        <canvas baseChart
+            [data]="barChartData"
+            [plugins]="barChartPlugins"
+            [legend]="barChartLegend"
+            [type]="'bar'">
+        </canvas>
+    </ng-container>
+</main>
