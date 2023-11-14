@@ -1,5 +1,8 @@
 <main class="p-3">
-    <h1 class="fs-3 fw-bold">Maintenance - Part Master</h1>
+    <div class="head">
+        <h1 class="fs-3 fw-bold">Maintenance - Part Master</h1>
+        <div class="logo">Denso Philippines Corporation</div>
+    </div>
 
     <div class="select-name mt-3">
         <span>Part ID:</span>
@@ -26,7 +29,7 @@
         <div class="d-flex gap-2">
             <app-button [backgroundColor]="'lightgreen'" (click)="openLg(content)">Add</app-button>
             <app-button [backgroundColor]="'lightyellow'">Edit</app-button>
-            <app-button [backgroundColor]="'red'" >Delete</app-button>
+            <app-button [backgroundColor]="'red'" (click)="deleteZone()">Delete</app-button>
             <app-button [backgroundColor]="'lightblue'">Access</app-button>
         </div>
 
@@ -52,7 +55,7 @@
         <tbody>
             <tr *ngFor="let part of parts">
                 <th scope="row">
-                    <input type="checkbox" >
+                    <input type="checkbox" [checked]="isSelected(part._id)" (change)="onCheckboxChange($event, part._id)">
                 </th>
                 <td><ngb-highlight [result]="part.name" [term]="filter.value"></ngb-highlight></td>
                 <td><ngb-highlight [result]="'P0' + part.code" [term]="filter.value"></ngb-highlight></td>

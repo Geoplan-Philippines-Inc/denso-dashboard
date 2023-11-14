@@ -22,6 +22,7 @@ export class PartsService {
   }
 
   deleteParts(_id: any){
-    return this.http.delete(this.partsUrl, _id)
+    return this.http.delete(this.partsUrl + _id)
   }
+
 }

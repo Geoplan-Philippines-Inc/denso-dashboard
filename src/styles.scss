@@ -16,3 +16,17 @@ p{
     margin: 0;
     box-sizing: border-box;
 }
+
+
+.head{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.head .logo{
+    text-decoration: underline;
+    font-size: 1.15rem;
+    font-weight: 500;
+}

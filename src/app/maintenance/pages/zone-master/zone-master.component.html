@@ -1,5 +1,12 @@
 <main class="p-3">
-  <h1 class="fs-3 fw-bold">Maintenance - Zone Master</h1>
+  <div class="d-flex justify-content-between">
+    <div class="head">
+      <h1 class="fs-3 fw-bold">Maintenance - Zone Master</h1>
+      <div class="logo">Denso Philippines Corporation</div>
+    </div>
+
+    <p class="text-underline" ></p>
+  </div>
 
   <div class="select-name mt-3">
     <span>Zone ID: </span>
@@ -57,11 +64,9 @@
     </tbody>
   </table>
   <!-- Add a button or any trigger to call getSelectedZoneIds method -->
-  <button (click)="getSelectedZoneIds()">Get Selected Zone IDs</button>
 
-
-  <ng-template #content let-modal>
-    <form [formGroup]="zoneMasterForm" (ngSubmit)="newPart()">
+  <ng-template #content  let-modal>
+    <form class="modalasd"  [formGroup]="zoneMasterForm" (ngSubmit)="newPart()">
       <div class="modal-header">
         <h4 class="modal-title">New Zone</h4>
         <button type="button" class="btn-close me-1" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>

@@ -34,6 +34,9 @@ export class PartMasterComponent {
 	code: number = 3000;
 	length: number = NaN;
 	code_id: number = NaN;
+	selectedForm!: FormGroup;
+	selectedZone = []
+	selectedZoneIds: any;
 
 	parts: any[] = [];
 	newParts: any[] = [];
@@ -50,7 +53,8 @@ export class PartMasterComponent {
 		// 	startWith(''),
 		// 	map((text) => search(text, pipe)),
 		// );
-		this.handleFormValue()
+		this.getAllParts()
+		this.handleSelectedZone()
 	}	
 
 	ngOnInit(){
@@ -66,17 +70,50 @@ export class PartMasterComponent {
 			this.parts = res.data.parts
 			this.length = res.length;
 			this.code += this.length
+			this.handleFormValue()
 		})
 	}
 
 	handleFormValue(){
-		this.getAllParts()
-		console.log(this.code)
 		this.partMasterForm = this.formBuilder.group({
 			code: this.code,
 			name: '',
 			kpiValue: 12,
 		})
+	}
+
+	
+	handleSelectedZone() {
+			this.selectedForm = this.formBuilder.group({
+			selectedZones: this.formBuilder.array([]),
+		})
+	}
+	
+	get selectedZones(): FormArray {
+		return this.selectedForm.get('selectedZones') as FormArray;
+	}
+	
+	isSelected(zoneId: string): boolean {
+		console.log('selected')
+		return this.selectedZones.value.includes(zoneId);
+	}
+	
+	onCheckboxChange(event: any, zoneId: string) {
+		const selectedZones = this.selectedZones;
+	
+		if (event?.target.checked) {
+			selectedZones.push(this.formBuilder.control(zoneId))
+		} else {
+			const index = selectedZones.controls.findIndex(x => x.value === zoneId);
+			selectedZones.removeAt(index);
+		}
+	
+		console.log('Selected Zones:', this.selectedZones.value);
+	}
+	
+	getSelectedZoneIds() {
+		this.selectedZoneIds = this.selectedZones.value;
+		console.log('Selected Zone IDs:', this.selectedZoneIds);
 	}
 
 	newPart(){
@@ -110,8 +147,19 @@ export class PartMasterComponent {
 
 	deleteId: any;
 
-	deletePart(){
-		this.partsService.deleteParts(this.deleteId).subscribe();
-		this.getAllParts()
+	deleteZone() {
+		this.deleteId = this.selectedZones.value;
+		console.log('Selected Zone IDs to delete:', this.deleteId);
+	
+		this.partsService.deleteParts(this.deleteId).subscribe(
+			(res: any) => {
+				console.log('Deletion successful:', res);
+				this.getAllParts();
+				this.selectedZones.clear();
+			},
+			(error) => {
+				console.error('Error during deletion:', error);
+			}
+		);
 	}
 }
