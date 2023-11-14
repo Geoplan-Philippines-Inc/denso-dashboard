@@ -9,6 +9,7 @@ import { PARTMASTERTABLEDATA } from '../../data/part-master-table-data';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ZoneMasterService } from '../../service/zone-master/zone-master.service';
 import { TagsMasterService } from '../../service/tags-master/tags-master.service';
+import { UserMasterService } from '../../service/user-master/user-master.service';
 
 @Component({
   selector: 'app-tag-master',
@@ -19,7 +20,7 @@ export class TagMasterComponent {
   // partMasterTable$: Observable<PartMasterTableInterface[]>;
   filter = new FormControl('', { nonNullable: true });
 
-  zoneMasterForm: any = FormGroup;
+  tagsMasterForm: any = FormGroup;
   selectedForm!: FormGroup;
   selectedZone = []
 
@@ -28,7 +29,7 @@ export class TagMasterComponent {
   code_id: number = NaN;
 
   tags: any[] = [];
-  parts: any[] = [];
+  users: any[] = [];
 
   newParts: any[] = [];
 
@@ -39,8 +40,7 @@ export class TagMasterComponent {
     pipe: DecimalPipe,
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
-    private zoneService: ZoneMasterService,
-    private partsService: PartsService,
+    private userService: UserMasterService,
     private tagsService: TagsMasterService,
   ) {
     // this.partMasterTable$ = this.filter.valueChanges.pipe(
@@ -52,36 +52,34 @@ export class TagMasterComponent {
   }
 
   ngOnInit() {
-    this.getAllZone()
     this.getAllTags()
+    this.getAllUser()
   }
 
   ngAfterViewInit(): void {
   }
 
-  getAllZone() {
+  getAllTags() {
     this.tagsService.loadParts().subscribe((res: any) => {
       this.tags = res.data.tags
       this.length = res.length;
       this.code += this.length
 
-      console.log(this.tags)
+      this.handleFormValue()
     })
   }
 
-  getAllTags() {
-    this.tagsService.loadParts().subscribe((res: any) => {
-      this.parts = res.data.parts
+  getAllUser() {
+    this.userService.loadParts().subscribe((res: any) => {
+      this.users = res.data.users
     })
   }
 
   handleFormValue() {
-    this.getAllZone()
-    console.log(this.code)
-    this.zoneMasterForm = this.formBuilder.group({
-      code: '',
-      name: '',
-      partCodeAndName: '',
+    this.tagsMasterForm = this.formBuilder.group({
+      code: this.code,
+      serial: '',
+      assignedUser: '',
     })
   }
 
@@ -119,7 +117,7 @@ export class TagMasterComponent {
   }
 
   newPart() {
-    const formData = this.zoneMasterForm.value;
+    const formData = this.tagsMasterForm.value;
     this.addNewPart(formData)
     console.log(formData)
   }
@@ -129,7 +127,7 @@ export class TagMasterComponent {
   }
 
   clear() {
-    this.zoneMasterForm.reset();
+    this.tagsMasterForm.reset();
   }
 
   openLg(content: any) {
@@ -137,9 +135,9 @@ export class TagMasterComponent {
   }
 
   addNewPart(data: any) {
-    this.zoneService.postParts(data).subscribe(
+    this.tagsService.postTags(data).subscribe(
       (response) => {
-        this.getAllZone()
+        this.getAllTags()
       },
       (error) => {
         console.log(error)
@@ -153,10 +151,10 @@ export class TagMasterComponent {
     this.deleteId = this.selectedZones.value;
     console.log('Selected Zone IDs to delete:', this.deleteId);
 
-    this.zoneService.deleteParts(this.deleteId).subscribe(
+    this.tagsService.deleteTags(this.deleteId).subscribe(
       (res: any) => {
         console.log('Deletion successful:', res);
-        this.getAllZone();
+        this.getAllTags();
         this.selectedZones.clear();
       },
       (error) => {

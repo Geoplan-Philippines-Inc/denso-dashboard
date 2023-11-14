@@ -1,25 +1,32 @@
 <main class="p-3">
   <div class="head">
-    <h1 class="fs-3 fw-bold">Maintenance - Zone Master</h1>
+    <h1 class="fs-3 fw-bold">Maintenance - Tag Master</h1>
     <div class="logo">Denso Philippines Corporation</div>
   </div>
   
   <div class="select-name mt-3">
-    <span>Zone ID: </span>
-    <span class="fw-bold ass-name">
-      P003314
-    </span>
-    <app-dropdown [options]="['P003313', 'P003314']"></app-dropdown>
+    <span>Tag ID: </span>
+    <div class="inp">
+      <input type="text">
+      <app-dropdown [options]="['T02343', 'T02342']"></app-dropdown>
+    </div>
   </div>
 
   <div class="select-name mt-3">
-    <span>Zone Name:</span>
-    <span class="fw-bold ass-name">
-      heating coil 100
-    </span>
-    <app-dropdown [options]="['screw A10', 'heating coil 100']"></app-dropdown>
+    <span>Tag Serial Number:</span>
+    <div class="inp">
+      <input type="text">
+      <app-dropdown [options]="['A06801B3124199', 'A06801A1120100']"></app-dropdown>
+    </div>
   </div>
 
+  <div class="select-name mt-3">
+    <span>Assigned User:</span>
+    <div class="inp">
+      <input type="text">
+      <app-dropdown [options]="['Lopez Maria', 'Cinco Lemuel']"></app-dropdown>
+    </div>
+  </div>
 
   <div class="mt-3 d-flex justify-content-between">
     <div class="d-flex gap-2">
@@ -53,18 +60,15 @@
         <th scope="row">
           <input type="checkbox" [checked]="isSelected(tag._id)" (change)="onCheckboxChange($event, tag._id)">
         </th>
-        <td><ngb-highlight [result]="tag.code" [term]="filter.value"></ngb-highlight></td>
+        <td><ngb-highlight [result]="'T00' + tag.code" [term]="filter.value"></ngb-highlight></td>
         <td><ngb-highlight [result]="tag.serial" [term]="filter.value"></ngb-highlight></td>
         <td><ngb-highlight [result]="tag.assignedUser" [term]="filter.value"></ngb-highlight></td>
       </tr>
     </tbody>
   </table>
-  <!-- Add a button or any trigger to call getSelectedZoneIds method -->
-  <button (click)="getSelectedZoneIds()">Get Selected Zone IDs</button>
-
 
   <ng-template #content let-modal>
-    <form [formGroup]="zoneMasterForm" (ngSubmit)="newPart()">
+    <form [formGroup]="tagsMasterForm" (ngSubmit)="newPart()">
       <div class="modal-header">
         <h4 class="modal-title">New Zone</h4>
         <button type="button" class="btn-close me-1" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
@@ -72,19 +76,19 @@
       <div class="modal-body">
         <p>Fill out neccesary information to add a zone</p>
         <div class="d-flex justify-content-between align-items-center mt-3">
-          <p class="fw-bold">Zone ID:</p>
+          <p class="fw-bold">Tag ID:</p>
           <div>
-            {{ 'P00' + this.code }}
+            {{ 'T00' + this.code }}
           </div>
         </div>
         <div class="d-flex justify-content-between align-items-center mt-2">
-          <p class="fw-bold">Zone Name:</p>
-          <input class="group-name-input" formControlName="name" type="text">
+          <p class="fw-bold">Serial Number:</p>
+          <input class="group-name-input" formControlName="serial" type="text">
         </div>
         <div class="d-flex justify-content-between align-items-center mt-2">
-          <p class="fw-bold">Part:</p>
-          <select formControlName="partCodeAndName">
-            <option [value]="part.code + ' / ' + part.name " *ngFor="let part of parts">{{ part.code + ' / ' + part.name }}</option>
+          <p class="fw-bold">Assigned User:</p>
+          <select formControlName="assignedUser">
+            <option [value]="user.code + ' / ' + user.name " *ngFor="let user of users">{{ user.code + ' / ' + user.name }}</option>
           </select>
         </div>
         <p class="mt-3 text-danger">* Required Items</p>
@@ -119,7 +123,7 @@
           <div class="d-flex justify-content-between align-items-center mt-2">
             <p class="fw-bold">Part:</p>
             <select>
-              <option [value]="part.code + ' / ' + part.name " *ngFor="let part of parts">{{ part.code + ' / ' + part.name }}
+              <option [value]="user.code + ' / ' + user.name " *ngFor="let user of users">{{ user.code + ' / ' + user.name }}
               </option>
             </select>
           </div>

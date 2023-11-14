@@ -17,11 +17,11 @@ export class TagsMasterService {
   }
   // https://denso-backend.onrender.com/api/geo/v1/parts
 
-  postParts(data: any){
+  postTags(data: any){
     return this.http.post(this.tagsUrl, data);
   }
 
-  deleteParts(_id: any){
-    return this.http.delete(this.tagsUrl, _id)
+  deleteTags(_id: any){
+    return this.http.delete(this.tagsUrl + _id)
   }
 }

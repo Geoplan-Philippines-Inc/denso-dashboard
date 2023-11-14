@@ -58,7 +58,7 @@
           <input type="checkbox" [checked]="isSelected(zone._id)" (change)="onCheckboxChange($event, zone._id)">
         </th>
         <td><ngb-highlight [result]="zone.name" [term]="filter.value"></ngb-highlight></td>
-        <td><ngb-highlight [result]="'P0' + zone.code" [term]="filter.value"></ngb-highlight></td>
+        <td><ngb-highlight [result]="'Z0' + this.code" [term]="filter.value"></ngb-highlight></td>
         <td><ngb-highlight [result]="zone.partCodeAndName" [term]="filter.value"></ngb-highlight></td>
       </tr>
     </tbody>
@@ -76,7 +76,7 @@
         <div class="d-flex justify-content-between align-items-center mt-3">
           <p class="fw-bold">Zone ID:</p>
           <div>
-            {{ 'P00' + this.code }}
+            {{ 'Z00' + this.code }}
           </div>
         </div>
         <div class="d-flex justify-content-between align-items-center mt-2">
@@ -85,7 +85,7 @@
         </div>
         <div class="d-flex justify-content-between align-items-center mt-2">
           <p class="fw-bold">Part:</p>
-          <select formControlName="partCodeAndName">
+          <select formControlName="partCodeAndName" class="modal-select">
             <option [value]="part.code + ' / ' + part.name " *ngFor="let part of parts">{{ part.code + ' / ' + part.name }}</option>
           </select>
         </div>
@@ -111,7 +111,7 @@
           <div class="d-flex justify-content-between align-items-center mt-3">
             <p class="fw-bold">Zone ID:</p>
             <div>
-              {{ 'P00' + this.code }}
+              {{ 'Z00' + this.code }}
             </div>
           </div>
           <div class="d-flex justify-content-between align-items-center mt-2">

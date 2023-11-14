@@ -45,12 +45,11 @@ export class ZoneMasterComponent {
     // 	startWith(''),
     // 	map((text) => search(text, pipe)),
     // );
-    this.handleFormValue()
+    this.getAllZone()
     this.handleSelectedZone()
   }
 
   ngOnInit() {
-    this.getAllZone()
     this.getAllParts()
   }
 
@@ -70,14 +69,15 @@ export class ZoneMasterComponent {
   getAllParts() {
     this.partsService.loadParts().subscribe((res: any) => {
       this.parts = res.data.parts
+
+      this.handleFormValue()
+      console.log(this.code)
     })
   }
 
   handleFormValue() {
-    this.getAllZone()
-    console.log(this.code)
     this.zoneMasterForm = this.formBuilder.group({
-      code: '',
+      code: this.code,
       name: '',
       partCodeAndName: '',
     })
