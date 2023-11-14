@@ -4,6 +4,7 @@ export const Constants = {
             parts: 'http://localhost:5000/api/geo/v1/parts/',
             zone: 'http://localhost:5000/api/geo/v1/zone/',
             tags: 'http://localhost:5000/api/geo/v1/tags/',
+            users: 'http://localhost:5000/api/geo/v1/users/',
         }, 
     }, 
     production: {
@@ -11,6 +12,7 @@ export const Constants = {
             parts: 'https://denso-backend.onrender.com/api/geo/v1/parts/',
             zone: 'https://denso-backend.onrender.com/api/geo/v1/zone/',
             tags: 'https://denso-backend.onrender.com/api/geo/v1/tags/',
+            users: 'https://denso-backend.onrender.com/api/geo/v1/users/',
         },
     }, 
 }

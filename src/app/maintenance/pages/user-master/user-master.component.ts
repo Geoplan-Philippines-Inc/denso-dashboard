@@ -9,6 +9,7 @@ import { PARTMASTERTABLEDATA } from '../../data/part-master-table-data';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ZoneMasterService } from '../../service/zone-master/zone-master.service';
 import { TagsMasterService } from '../../service/tags-master/tags-master.service';
+import { UserMasterService } from '../../service/user-master/user-master.service';
 
 @Component({
   selector: 'app-user-master',
@@ -27,7 +28,7 @@ export class UserMasterComponent {
   length: number = NaN;
   code_id: number = NaN;
 
-  tags: any[] = [];
+  users: any[] = [];
   parts: any[] = [];
 
   newParts: any[] = [];
@@ -40,8 +41,8 @@ export class UserMasterComponent {
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
     private zoneService: ZoneMasterService,
-    private partsService: PartsService,
     private tagsService: TagsMasterService,
+    private usersService: UserMasterService,
   ) {
     // this.partMasterTable$ = this.filter.valueChanges.pipe(
     // 	startWith(''),
@@ -60,12 +61,12 @@ export class UserMasterComponent {
   }
 
   getAllZone() {
-    this.tagsService.loadParts().subscribe((res: any) => {
-      this.tags = res.data.tags
+    this.usersService.loadParts().subscribe((res: any) => {
+      this.users = res.data.users
       this.length = res.length;
       this.code += this.length
 
-      console.log(this.tags)
+      console.log(this.users)
     })
   }
 

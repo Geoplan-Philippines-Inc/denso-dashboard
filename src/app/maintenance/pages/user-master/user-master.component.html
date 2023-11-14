@@ -1,22 +1,28 @@
 <main class="p-3">
-  <h1 class="fs-3 fw-bold">Maintenance - Zone Master</h1>
+  <h1 class="fs-3 fw-bold">Maintenance - User Master</h1>
 
   <div class="select-name mt-3">
-    <span>Zone ID: </span>
-    <span class="fw-bold ass-name">
-      P003314
-    </span>
-    <app-dropdown [options]="['P003313', 'P003314']"></app-dropdown>
+    <span>Associate Name:</span>
+    <input type="text">
+    <app-dropdown [options]="['Lopez Maria', 'Cinco Limuel']"></app-dropdown>
   </div>
 
   <div class="select-name mt-3">
-    <span>Zone Name:</span>
-    <span class="fw-bold ass-name">
-      heating coil 100
-    </span>
-    <app-dropdown [options]="['screw A10', 'heating coil 100']"></app-dropdown>
+    <span>Associate Number:</span>
+    <input type="text">
+    <app-dropdown [options]="['UO1229', 'UO1228']"></app-dropdown>
   </div>
 
+  <div class="select-name mt-3">
+    <span>Email Address:</span>
+    <input type="text">
+    <app-dropdown [options]="['Lopez@xxx', 'Cayanes@xxx']"></app-dropdown>
+  </div>
+
+  <div class="select-name mt-3">
+    <span>Group:</span>
+    <app-dropdown [options]="['Lopez@xxx', 'Cayanes@xxx']"></app-dropdown>
+  </div>
 
   <div class="mt-3 d-flex justify-content-between">
     <div class="d-flex gap-2">
@@ -40,24 +46,31 @@
     <thead>
       <tr>
         <th scope="col">Select</th>
-        <th scope="col">Tag ID</th>
-        <th scope="col">Tag Serial Number</th>
-        <th scope="col">Assigned User</th>
+        <th scope="col">Associate Number</th>
+        <th scope="col">Associate Name</th>
+        <th scope="col">Associate Password</th>
+        <th scope="col">Group</th>
+        <th scope="col">Group Leader</th>
+        <th scope="col">User Type</th>
+        <th scope="col">Email Address</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let tag of tags">
+      <tr *ngFor="let user of users">
         <th scope="row">
-          <input type="checkbox" [checked]="isSelected(tag._id)" (change)="onCheckboxChange($event, tag._id)">
+          <input type="checkbox" [checked]="isSelected(user._id)" (change)="onCheckboxChange($event, user._id)">
         </th>
-        <td><ngb-highlight [result]="tag.code" [term]="filter.value"></ngb-highlight></td>
-        <td><ngb-highlight [result]="tag.serial" [term]="filter.value"></ngb-highlight></td>
-        <td><ngb-highlight [result]="tag.assignedUser" [term]="filter.value"></ngb-highlight></td>
+        <td><ngb-highlight [result]="user.code" [term]="filter.value"></ngb-highlight></td>
+        <td><ngb-highlight [result]="user.name" [term]="filter.value"></ngb-highlight></td>
+        <td><ngb-highlight [result]="user.password" [term]="filter.value"></ngb-highlight></td>
+        <td><ngb-highlight [result]="user.groupId" [term]="filter.value"></ngb-highlight></td>
+        <td><ngb-highlight [result]="user.isLeader ? 'Yes' : 'No'" [term]="filter.value"></ngb-highlight></td>
+        <td><ngb-highlight [result]="user.type" [term]="filter.value"></ngb-highlight></td>
+        <td><ngb-highlight [result]="user.email" [term]="filter.value"></ngb-highlight></td>
       </tr>
     </tbody>
   </table>
   <!-- Add a button or any trigger to call getSelectedZoneIds method -->
-  <button (click)="getSelectedZoneIds()">Get Selected Zone IDs</button>
 
 
   <ng-template #content let-modal>

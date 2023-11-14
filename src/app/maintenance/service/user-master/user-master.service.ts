@@ -10,18 +10,18 @@ export class UserMasterService {
     private http:HttpClient
   ) { }
 
-  readonly tagsUrl = Constants.development.apiUrl.tags;
+  readonly usersUrl = Constants.development.apiUrl.users;
 
   loadParts(){
-    return this.http.get(this.tagsUrl);
+    return this.http.get(this.usersUrl);
   }
   // https://denso-backend.onrender.com/api/geo/v1/parts
 
   postParts(data: any){
-    return this.http.post(this.tagsUrl, data);
+    return this.http.post(this.usersUrl, data);
   }
 
   deleteParts(_id: any){
-    return this.http.delete(this.tagsUrl, _id)
+    return this.http.delete(this.usersUrl, _id)
   }
 }
