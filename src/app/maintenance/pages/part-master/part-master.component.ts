@@ -108,12 +108,12 @@ export class PartMasterComponent {
 			selectedZones.removeAt(index);
 		}
 	
-		console.log('Selected Zones:', this.selectedZones.value);
+		console.log('Selected Part:', this.selectedZones.value);
 	}
 	
 	getSelectedZoneIds() {
 		this.selectedZoneIds = this.selectedZones.value;
-		console.log('Selected Zone IDs:', this.selectedZoneIds);
+		console.log('Selected Part IDs:', this.selectedZoneIds);
 	}
 
 	newPart(){
@@ -149,7 +149,7 @@ export class PartMasterComponent {
 
 	deleteZone() {
 		this.deleteId = this.selectedZones.value;
-		console.log('Selected Zone IDs to delete:', this.deleteId);
+		console.log('Selected Part IDs to delete:', this.deleteId);
 	
 		this.partsService.deleteParts(this.deleteId).subscribe(
 			(res: any) => {

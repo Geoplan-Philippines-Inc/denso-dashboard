@@ -148,21 +148,36 @@ export class UserMasterComponent {
     )
   }
 
+  headsUpMessage: String = '';
   deleteId: any;
+  confirm: any = false;
 
-  deleteZone() {
+  deleteZone(headsUp: any) {
+    this.modalService.open(headsUp, { size: 'sm' });
     this.deleteId = this.selectedZones.value;
-    console.log('Selected Zone IDs to delete:', this.deleteId);
 
-    this.zoneService.deleteParts(this.deleteId).subscribe(
+    if(this.confirm){
+    }else if(this.deleteId.length == 0){
+      this.headsUpMessage = "No selected items" 
+    }else{
+      this.headsUpMessage = "Are you sure you want to delete this part!" 
+    }
+  }
+
+  confirmDelete(){
+    this.deleteId = this.selectedZones.value;
+
+    this.usersService.deleteParts(this.deleteId).subscribe(
       (res: any) => {
         console.log('Deletion successful:', res);
         this.getAllZone();
         this.selectedZones.clear();
+        this.modalService.dismissAll('Cross click');
       },
       (error) => {
         console.error('Error during deletion:', error);
       }
     );
+    console.log('deleted na?')
   }
 }

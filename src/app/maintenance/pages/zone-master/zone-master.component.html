@@ -29,7 +29,7 @@
     <div class="d-flex gap-2">
       <app-button [backgroundColor]="'lightgreen'" (click)="openLg(content)">Add</app-button>
       <app-button [backgroundColor]="'lightyellow'" (click)="openLg(edit)" >Edit</app-button>
-      <app-button [backgroundColor]="'red'" (click)="deleteZone()">Delete</app-button>
+      <app-button [backgroundColor]="'red'" (click)="deleteZone(headsUp)">Delete</app-button>
       <app-button [backgroundColor]="'lightblue'">Access</app-button>
     </div>
 
@@ -58,7 +58,7 @@
           <input type="checkbox" [checked]="isSelected(zone._id)" (change)="onCheckboxChange($event, zone._id)">
         </th>
         <td><ngb-highlight [result]="zone.name" [term]="filter.value"></ngb-highlight></td>
-        <td><ngb-highlight [result]="'Z0' + this.code" [term]="filter.value"></ngb-highlight></td>
+        <td><ngb-highlight [result]="'Z0' + zone.code" [term]="filter.value"></ngb-highlight></td>
         <td><ngb-highlight [result]="zone.partCodeAndName" [term]="filter.value"></ngb-highlight></td>
       </tr>
     </tbody>
@@ -132,5 +132,19 @@
           <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
         </div>
       </form>
+    </ng-template>
+
+    <ng-template #headsUp let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title fw-bold">Heads up!</h4>
+        <button type="button" class="btn-close me-1" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="px-3 fw-semibold my-3">
+        {{ this.headsUpMessage }}
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="this.headsUpMessage !== 'No selected items'" type="submit" class="btn btn-light"  (click)="confirmDelete()">Yes</button>
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+      </div>
     </ng-template>
 </main>

@@ -10,7 +10,7 @@ export class UserMasterService {
     private http:HttpClient
   ) { }
 
-  readonly usersUrl = Constants.production.apiUrl.users;
+  readonly usersUrl = Constants.development.apiUrl.users;
 
   loadParts(){
     return this.http.get(this.usersUrl);
@@ -22,6 +22,6 @@ export class UserMasterService {
   }
 
   deleteParts(_id: any){
-    return this.http.delete(this.usersUrl, _id)
+    return this.http.delete(this.usersUrl + _id)
   }
 }
