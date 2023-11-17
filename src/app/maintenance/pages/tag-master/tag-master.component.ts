@@ -162,4 +162,37 @@ export class TagMasterComponent {
       }
     );
   }
+
+  headsUpMessage: String = '';
+	deleteTag: any;
+	confirm: any = false;
+	
+	deleteTags(headsUp: any) {
+	this.modalService.open(headsUp, { size: 'sm' });
+	this.deleteId = this.selectedZones.value;
+
+	if(this.confirm){
+		}else if(this.deleteId.length == 0){
+			this.headsUpMessage = "No selected items" 
+		}else{
+			this.headsUpMessage = "Are you sure you want to delete this part!" 
+		}
+	}
+
+	confirmDelete(){
+	this.deleteId = this.selectedZones.value;
+
+	this.tagsService.deleteTags(this.deleteId).subscribe(
+		(res: any) => {
+		console.log('Deletion successful:', res);
+			this.getAllTags();
+			this.selectedZones.clear();
+			this.modalService.dismissAll('Cross click');
+		},
+		(error) => {
+			console.error('Error during deletion:', error);
+		}
+	);
+		console.log('deleted na?')
+	}
 }

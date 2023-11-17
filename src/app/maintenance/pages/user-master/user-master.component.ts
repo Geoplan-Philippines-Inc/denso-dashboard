@@ -10,6 +10,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { ZoneMasterService } from '../../service/zone-master/zone-master.service';
 import { TagsMasterService } from '../../service/tags-master/tags-master.service';
 import { UserMasterService } from '../../service/user-master/user-master.service';
+import { GroupMasterService } from '../../service/group-master/group-master.service';
 
 @Component({
   selector: 'app-user-master',
@@ -24,12 +25,12 @@ export class UserMasterComponent {
   selectedForm!: FormGroup;
   selectedZone = []
 
-  code: number = 3000;
+  code: number = 1000;
   length: number = NaN;
   code_id: number = NaN;
 
   users: any[] = [];
-  parts: any[] = [];
+  groups: any[] = [];
 
   newParts: any[] = [];
 
@@ -41,48 +42,49 @@ export class UserMasterComponent {
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
     private zoneService: ZoneMasterService,
-    private tagsService: TagsMasterService,
+    private groupsService: GroupMasterService,
     private usersService: UserMasterService,
   ) {
     // this.partMasterTable$ = this.filter.valueChanges.pipe(
     // 	startWith(''),
     // 	map((text) => search(text, pipe)),
     // );
-    this.handleFormValue()
+    this.getAllUsers()
     this.handleSelectedZone()
   }
 
   ngOnInit() {
-    this.getAllZone()
-    this.getAllTags()
+    this.getAllGroups()
   }
 
   ngAfterViewInit(): void {
   }
 
-  getAllZone() {
+  getAllUsers() {
     this.usersService.loadParts().subscribe((res: any) => {
       this.users = res.data.users
       this.length = res.length;
       this.code += this.length
 
-      console.log(this.users)
-    })
+      this.handleFormValue()
+    })  
   }
 
-  getAllTags() {
-    this.tagsService.loadParts().subscribe((res: any) => {
-      this.parts = res.data.parts
+  getAllGroups() {
+    this.groupsService.loadGroups().subscribe((res: any) => {
+      this.groups = res.data.groups
     })
   }
 
   handleFormValue() {
-    this.getAllZone()
-    console.log(this.code)
     this.zoneMasterForm = this.formBuilder.group({
-      code: '',
+      code: this.code,
       name: '',
-      partCodeAndName: '',
+      password: '',
+      groupId: '',
+      isLeader: true,
+      type: '',
+      email: '',
     })
   }
 
@@ -138,9 +140,9 @@ export class UserMasterComponent {
   }
 
   addNewPart(data: any) {
-    this.zoneService.postParts(data).subscribe(
+    this.usersService.postParts(data).subscribe(
       (response) => {
-        this.getAllZone()
+        this.getAllUsers()
       },
       (error) => {
         console.log(error)
@@ -170,7 +172,7 @@ export class UserMasterComponent {
     this.usersService.deleteParts(this.deleteId).subscribe(
       (res: any) => {
         console.log('Deletion successful:', res);
-        this.getAllZone();
+        this.getAllUsers();
         this.selectedZones.clear();
         this.modalService.dismissAll('Cross click');
       },

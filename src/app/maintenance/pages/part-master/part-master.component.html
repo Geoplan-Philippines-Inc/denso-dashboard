@@ -29,7 +29,7 @@
         <div class="d-flex gap-2">
             <app-button [backgroundColor]="'lightgreen'" (click)="openLg(content)">Add</app-button>
             <app-button [backgroundColor]="'lightyellow'">Edit</app-button>
-            <app-button [backgroundColor]="'red'" (click)="deleteZone()">Delete</app-button>
+            <app-button [backgroundColor]="'red'" (click)="deleteZone(headsUp)">Delete</app-button>
             <app-button [backgroundColor]="'lightblue'">Access</app-button>
         </div>
 
@@ -67,11 +67,11 @@
     <ng-template #content let-modal>
         <form [formGroup]="partMasterForm" (ngSubmit)="newPart()">
             <div class="modal-header">
-                <h4 class="modal-title">New Group</h4>
+                <h4 class="modal-title">New Part</h4>
                 <button type="button" class="btn-close me-1" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
             </div>
             <div class="modal-body">
-                <p>Fill out neccesary information to add a group</p>
+                <p>Fill out neccesary information to add a part</p>
                 <div class="d-flex justify-content-between align-items-center mt-3">
                     <p class="fw-bold">PART ID:</p>
                     <div>
@@ -95,5 +95,19 @@
                 <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
             </div>
         </form>
+    </ng-template>
+
+    <ng-template #headsUp let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title fw-bold">Heads up!</h4>
+            <button type="button" class="btn-close me-1" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="px-3 fw-semibold my-3">
+            {{ this.headsUpMessage }}
+        </div>
+        <div class="modal-footer">
+          <button *ngIf="this.headsUpMessage !== 'No selected items'" type="submit" class="btn btn-light"    (click)="confirmDelete()">Yes</button>
+            <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        </div>
     </ng-template>
 </main> 

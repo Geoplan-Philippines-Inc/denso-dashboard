@@ -27,3 +27,22 @@
     border: 1px solid black;
     outline: none;
 }
+
+.add-input{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: .5rem;
+
+    p{
+        font-weight: 600;
+    }
+    
+    select{
+        width: 20rem;
+        background-color: transparent;
+        border: 1px solid black;
+        padding: .25rem;
+    }
+}
+

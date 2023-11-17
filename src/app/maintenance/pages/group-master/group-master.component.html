@@ -56,12 +56,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let group of groupMasterTable$ | async; index as i">
+            <tr *ngFor="let group of groups">
                 <th scope="row">
                     <input type="checkbox">
                 </th>
                 <td><ngb-highlight [result]="group.name" [term]="filter.value"></ngb-highlight></td>
-                <td><ngb-highlight [result]="group.id | number" [term]="filter.value"></ngb-highlight></td>
+                <td><ngb-highlight [result]="group.code" [term]="filter.value"></ngb-highlight></td>
                 <td><ngb-highlight [result]="group.zone1" [term]="filter.value"></ngb-highlight></td>
                 <td><ngb-highlight [result]="group.zone2" [term]="filter.value"></ngb-highlight></td>
                 <td><ngb-highlight [result]="group.zone3" [term]="filter.value"></ngb-highlight></td>
@@ -164,4 +164,5 @@
             </div>
         </form>
     </ng-template>
+
 </main>
