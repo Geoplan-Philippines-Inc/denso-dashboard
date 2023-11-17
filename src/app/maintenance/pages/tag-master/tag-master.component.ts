@@ -24,6 +24,8 @@ export class TagMasterComponent {
   selectedForm!: FormGroup;
   selectedZone = []
 
+  isLoading: boolean = true;
+
   code: number = 3000;
   length: number = NaN;
   code_id: number = NaN;
@@ -66,7 +68,12 @@ export class TagMasterComponent {
       this.code += this.length
 
       this.handleFormValue()
-    })
+    },
+    (error: any) => {
+      this.isLoading = false;
+    }
+    
+    )
   }
 
   getAllUser() {

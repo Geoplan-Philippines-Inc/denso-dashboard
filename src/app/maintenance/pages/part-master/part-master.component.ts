@@ -38,6 +38,9 @@ export class PartMasterComponent {
 	selectedZone = []
 	selectedZoneIds: any;
 
+	isLoading: boolean = true;
+
+
 	parts: any[] = [];
 	newParts: any[] = [];
 
@@ -71,7 +74,11 @@ export class PartMasterComponent {
 			this.length = res.length;
 			this.code += this.length
 			this.handleFormValue()
-		})
+		},
+		(error: any) => {
+			this.isLoading = false;
+		}
+		)
 	}
 
 	handleFormValue(){

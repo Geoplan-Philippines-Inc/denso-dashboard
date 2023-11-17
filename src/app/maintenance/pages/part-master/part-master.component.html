@@ -53,6 +53,13 @@
             </tr>
         </thead>
         <tbody>
+            <tr *ngIf="!this.isLoading">
+                <th colspan="5">
+                    <div class="skeleton d-flex justify-content-center align-items-center">
+                        loading data..
+                    </div>
+                </th>
+            </tr>
             <tr *ngFor="let part of parts">
                 <th scope="row">
                     <input type="checkbox" [checked]="isSelected(part._id)" (change)="onCheckboxChange($event, part._id)">
