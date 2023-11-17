@@ -53,6 +53,7 @@
         <th scope="col">Tag ID</th>
         <th scope="col">Tag Serial Number</th>
         <th scope="col">Assigned User</th>
+        <th scope="col" class="text-center">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -61,8 +62,31 @@
           <input type="checkbox" [checked]="isSelected(tag._id)" (change)="onCheckboxChange($event, tag._id)">
         </th>
         <td><ngb-highlight [result]="'T00' + tag.code" [term]="filter.value"></ngb-highlight></td>
-        <td><ngb-highlight [result]="tag.serial" [term]="filter.value"></ngb-highlight></td>
-        <td><ngb-highlight [result]="tag.assignedUser" [term]="filter.value"></ngb-highlight></td>
+        <td>
+          <div *ngIf="tag.isEdit">
+            <input type="text" [(ngModel)]="tag.serial">
+          </div>
+          <div *ngIf="!tag.isEdit">
+            <ngb-highlight [result]="tag.serial" [term]="filter.value"></ngb-highlight>
+          </div>
+        </td>
+        <td>
+          <div *ngIf="tag.isEdit">
+            <input type="text" [(ngModel)]="tag.assignedUser">
+          </div>
+          <div *ngIf="!tag.isEdit">
+            <ngb-highlight [result]="tag.assignedUser" [term]="filter.value"></ngb-highlight>
+          </div>
+        </td>
+        <td class="text-center">
+          <div *ngIf="!tag.isEdit" (click)="onEdit(tag)">
+            <i class="bi bi-pencil-square"></i>
+          </div>
+          <div *ngIf="tag.isEdit" class="d-flex justify-content-center gap-2">
+            <i class="bi bi-cloud-download" (click)="onSave(tag)"></i>
+            <i class="bi bi-x-lg" (click)="onClose(tag)"></i>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>

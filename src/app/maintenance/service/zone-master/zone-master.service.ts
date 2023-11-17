@@ -22,7 +22,7 @@ export class ZoneMasterService {
   }
 
   updateZone(_id: any, data: any) {
-    return this.http.patch(this.zoneUrl, _id, data)
+    return this.http.put(this.zoneUrl + _id, data)
   }
 
   deleteParts(_id: any){

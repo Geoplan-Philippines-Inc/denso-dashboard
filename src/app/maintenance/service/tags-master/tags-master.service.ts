@@ -10,7 +10,7 @@ export class TagsMasterService {
     private http:HttpClient
   ) { }
 
-  readonly tagsUrl = Constants.production.apiUrl.tags;
+  readonly tagsUrl = Constants.development.apiUrl.tags;
 
   loadParts(){
     return this.http.get(this.tagsUrl);
@@ -19,6 +19,10 @@ export class TagsMasterService {
 
   postTags(data: any){
     return this.http.post(this.tagsUrl, data);
+  }
+
+  updateTags(_id: any, data: any) {
+    return this.http.put(this.tagsUrl + _id, data)
   }
 
   deleteTags(_id: any){

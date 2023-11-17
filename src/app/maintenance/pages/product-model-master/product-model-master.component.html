@@ -140,35 +140,129 @@
         <form>
             <div class="modal-header">
                 <h4 class="modal-title">Edit Zone</h4>
-                <button type="button" class="btn-close me-1" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+                <button
+                    type="button"
+                    class="btn-close me-1"
+                    aria-label="Close"
+                    (click)="modal.dismiss('Cross click')"
+                ></button>
             </div>
             <div class="modal-body">
                 <p>Fill out neccesary information to edit zone</p>
-                <div class="d-flex justify-content-between align-items-center mt-3">
-                    <p class="fw-bold">Zone ID:</p>
-                    <div>
-                        Z000032
-                    </div>
+                <div
+                    class="d-flex justify-content-between align-items-center mt-3"
+                >
+                    <p class="fw-bold">Product Model ID:</p>
+                    <div>Z000032</div>
                 </div>
-                <div class="d-flex justify-content-between align-items-center mt-2">
-                    <p class="fw-bold">Zone Name:</p>
-                    <input class="group-name-input" type="text">
+                <div
+                    class="d-flex justify-content-between align-items-center mt-2"
+                >
+                    <p class="fw-bold">Product Model Name:</p>
+                    <input class="group-name-input" type="text" />
                 </div>
-                <div class="d-flex justify-content-between align-items-center mt-2">
-                    <p class="fw-bold">Part:</p>
+                <div
+                    class="d-flex justify-content-between align-items-center mt-2"
+                >
+                    <p class="fw-bold">KPI value:</p>
+                    <input class="group-name-input" type="text" />
+                </div>
+                <div
+                    class="d-flex justify-content-between align-items-center mt-2"
+                >
+                    <p class="fw-bold">Part #1:</p>
                     <select>
                         <option value="Random">Random</option>
                         <option value="Random">Random</option>
                         <option value="Random">Random</option>
                     </select>
                 </div>
+                <div
+                    class="d-flex justify-content-between align-items-center mt-2"
+                >
+                    <p class="fw-bold">Part #2:</p>
+                    <select>
+                        2
+                        <option value="Random">Random</option>
+                        <option value="Random">Random</option>
+                        <option value="Random">Random</option>
+                    </select>
+                </div>
+                <div
+                    class="d-flex justify-content-between align-items-center mt-2"
+                >
+                    <p class="fw-bold">Part #3:</p>
+                    <select>
+                        <option value="Random">Random</option>
+                        <option value="Random">Random</option>
+                        <option value="Random">Random</option>
+                    </select>
+                </div>
+                <div
+                    class="d-flex justify-content-between align-items-center mt-2"
+                >
+                    <p class="fw-bold">Part #4 :</p>
+                    <select>
+                        <option value="Random">Random</option>
+                        <option value="Random">Random</option>
+                        <option value="Random">Random</option>
+                    </select>
+                </div>
+                <div
+                    class="d-flex justify-content-between align-items-center mt-2"
+                >
+                    <p class="fw-bold">Part #5:</p>
+                    <select>
+                        <option value="Random">Random</option>
+                        <option value="Random">Random</option>
+                        <option value="Random">Random</option>
+                    </select>
+                </div>
+                <div
+                    class="d-flex justify-content-between align-items-center mt-2"
+                >
+                    <p class="fw-bold">Part #6:</p>
+                    <select>
+                        <option value="Random">Random</option>
+                        <option value="Random">Random</option>
+                        <option value="Random">Random</option>
+                    </select>
+                </div>
+                <div
+                    class="d-flex justify-content-between align-items-center mt-2"
+                >
+                    <p class="fw-bold">Part #7:</p>
+                    <select>
+                        <option value="Random">Random</option>
+                        <option value="Random">Random</option>
+                        <option value="Random">Random</option>
+                    </select>
+                </div>
+                <div
+                    class="d-flex justify-content-between align-items-center mt-2"
+                >
+                    <p class="fw-bold">Part #8:</p>
+                    <select>
+                        <option value="Random">Random</option>
+                        <option value="Random">Random</option>
+                        <option value="Random">Random</option>
+                    </select>
+                </div>
+
                 <p class="mt-3 text-danger">* Required Items</p>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-light">Save and close</button>
-                <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+                <button type="submit" class="btn btn-light">
+                    Save and close
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-light"
+                    (click)="modal.close('Close click')"
+                >
+                    Close
+                </button>
             </div>
         </form>
     </ng-template>
-
 </main>

@@ -195,4 +195,30 @@ export class TagMasterComponent {
 	);
 		console.log('deleted na?')
 	}
+
+  
+	onEdit(groupObj: any){
+		this.tags.forEach(element => {
+			element.isEdit = false;
+		});
+		groupObj.isEdit = true
+
+		// console.log(groupObj)
+	}
+
+	onSave(groupObj: any){
+		this.tagsService.updateTags(groupObj._id, groupObj).subscribe(
+			(res: any) => {
+				console.log('success')
+				groupObj.isEdit = false
+			},
+			(error) => {
+				console.log(error)
+			}
+		)
+	}
+
+	onClose(groupObj: any){
+		groupObj.isEdit = false
+	}
 }

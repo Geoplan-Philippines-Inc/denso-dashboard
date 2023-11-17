@@ -62,4 +62,30 @@ export class GroupMasterComponent {
 	addAndClose(){
 		
 	}
+	
+
+	onEdit(groupObj: any){
+		this.groups.forEach(element => {
+			element.isEdit = false;
+		});
+		groupObj.isEdit = true
+
+		// console.log(groupObj)
+	}
+
+	onSave(groupObj: any){
+		this.groupMasterService.updateGroups(groupObj._id, groupObj).subscribe(
+			(res: any) => {
+				console.log('success')
+				groupObj.isEdit = false
+			},
+			(error) => {
+				console.log(error)
+			}
+		)
+	}
+
+	onClose(groupObj: any){
+		groupObj.isEdit = false
+	}
 }

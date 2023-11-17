@@ -25,4 +25,7 @@ export class PartsService {
     return this.http.delete(this.partsUrl + _id)
   }
 
+  updateParts(_id: any, data: any) {
+    return this.http.put(this.partsUrl + _id, data)
+  }
 }

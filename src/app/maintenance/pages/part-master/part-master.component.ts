@@ -44,9 +44,9 @@ export class PartMasterComponent {
 	errorMessage!: String[]
 	constructor(
 		pipe: DecimalPipe,
-		private modalService: NgbModal,
-		private formBuilder: FormBuilder,
-		private partsService: PartsService,
+			private modalService: NgbModal,
+			private formBuilder: FormBuilder,
+			private partsService: PartsService,
 		) {
 			
 		// this.partMasterTable$ = this.filter.valueChanges.pipe(
@@ -176,5 +176,30 @@ export class PartMasterComponent {
 		}
 	);
 		console.log('deleted na?')
+	}
+
+	onEdit(groupObj: any){
+		this.parts.forEach(element => {
+			element.isEdit = false;
+		});
+		groupObj.isEdit = true
+
+		// console.log(groupObj)
+	}
+
+	onSave(groupObj: any){
+		this.partsService.updateParts(groupObj._id, groupObj).subscribe(
+			(res: any) => {
+				console.log('success')
+				groupObj.isEdit = false
+			},
+			(error) => {
+				console.log(error)
+			}
+		)
+	}
+
+	onClose(groupObj: any){
+		groupObj.isEdit = false
 	}
 }

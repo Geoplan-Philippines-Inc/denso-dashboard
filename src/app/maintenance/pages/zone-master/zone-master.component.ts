@@ -63,7 +63,6 @@ export class ZoneMasterComponent {
       this.code += this.length
       
       this.handleFormValue()
-      console.log('code: ' + this.code)
     })
   }
 
@@ -109,7 +108,7 @@ export class ZoneMasterComponent {
     console.log('Selected Zones:', this.selectedZones.value);
   }
 
-  getSelectedZoneIds() {
+  getSelectedZoneIds() { 
     this.selectedZoneIds = this.selectedZones.value;
     console.log('Selected Zone IDs:', this.selectedZoneIds);
   }
@@ -175,4 +174,28 @@ export class ZoneMasterComponent {
     );
     console.log('deleted na?')
   }
+
+  onEdit(groupObj: any){
+		this.zone.forEach(element => {
+			element.isEdit = false;
+		});
+		groupObj.isEdit = true
+		// console.log(groupObj)
+	}
+
+	onSave(groupObj: any){
+		this.zoneService.updateZone(groupObj._id, groupObj).subscribe(
+			(res: any) => {
+				console.log('success')
+				groupObj.isEdit = false
+			},
+			(error) => {
+				console.log(error)
+			}
+		)
+	}
+
+	onClose(groupObj: any){
+		groupObj.isEdit = false
+	}
 }
