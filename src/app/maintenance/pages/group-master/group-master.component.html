@@ -56,6 +56,13 @@
             </tr>
         </thead>
         <tbody>
+            <tr *ngIf="this.isLoading">
+                <th colspan="9">
+                    <div class="skeleton d-flex justify-content-center align-items-center">
+                        loading data..
+                    </div>
+                </th>
+            </tr>
             <tr class="edit-row" *ngFor="let group of groups">
                 <th scope="row">
                     <input type="checkbox">
@@ -129,43 +136,43 @@
         </div>
         <div class="modal-body">
             <p>Fill out neccesary information to add a group</p>
-            <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="input-style">
                 <p class="fw-bold">Group ID:</p>
                 G0007
             </div>
-            <div class="d-flex justify-content-between align-items-center mt-2">
+            <div class="input-style">
                 <p class="fw-bold">Group Name:</p>
                 <input class="group-name-input" type="text">
             </div>
-            <div class="d-flex justify-content-between align-items-center mt-2">
+            <div class="input-style">
                 <p class="fw-bold">Zone #1:</p>
                 <app-dropdown
                 [width]="'20rem'"
                 [options]="['Z0001/painting', 'Z0002/packing']"
                 ></app-dropdown>
             </div>
-            <div class="d-flex justify-content-between align-items-center mt-2">
+            <div class="input-style">
                 <p class="fw-bold">Zone #2:</p>
                 <app-dropdown
                 [width]="'20rem'"
                 [options]="['Z0001/painting', 'Z0002/packing']"
                 ></app-dropdown>
             </div>
-            <div class="d-flex justify-content-between align-items-center mt-2">
+            <div class="input-style">
                 <p class="fw-bold">Zone #3:</p>
                 <app-dropdown
                 [width]="'20rem'"
                 [options]="['Z0001/painting', 'Z0002/packing']"
                 ></app-dropdown>
             </div>
-            <div class="d-flex justify-content-between align-items-center mt-2">
+            <div class="input-style">
                 <p class="fw-bold">Zone #4:</p>
                 <app-dropdown
                 [width]="'20rem'"
                 [options]="['Z0001/painting', 'Z0002/packing']"
                 ></app-dropdown>
             </div>
-            <div class="d-flex justify-content-between align-items-center mt-2">
+            <div class="input-          ">
                 <p class="fw-bold">Zone #5:</p>
                 <app-dropdown
                 [width]="'20rem'"

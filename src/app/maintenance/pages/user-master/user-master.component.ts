@@ -24,6 +24,7 @@ export class UserMasterComponent {
   zoneMasterForm: any = FormGroup;
   selectedForm!: FormGroup;
   selectedZone = []
+  isLoading: boolean = true;
 
   code: number = 1000;
   length: number = NaN;
@@ -41,7 +42,6 @@ export class UserMasterComponent {
     pipe: DecimalPipe,
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
-    private zoneService: ZoneMasterService,
     private groupsService: GroupMasterService,
     private usersService: UserMasterService,
   ) {
@@ -61,13 +61,18 @@ export class UserMasterComponent {
   }
 
   getAllUsers() {
-    this.usersService.loadParts().subscribe((res: any) => {
-      this.users = res.data.users
-      this.length = res.length;
-      this.code += this.length
+    this.usersService.loadParts().subscribe(
+      (res: any) => {
+        this.users = res.data.users
+        this.isLoading = false;
+        this.length = res.length;
+        this.code += this.length
 
-      this.handleFormValue()
-    })  
+        this.handleFormValue()
+      }, (error: any) => {
+				this.isLoading = true;
+			}
+    )  
   }
 
   getAllGroups() {
@@ -182,4 +187,28 @@ export class UserMasterComponent {
     );
     console.log('deleted na?')
   }
+
+  onEdit(groupObj: any){
+		this.users.forEach(element => {
+			element.isEdit = false;
+		});
+		groupObj.isEdit = true
+
+	}
+
+	onSave(groupObj: any){
+		this.usersService.updateUser(groupObj._id, groupObj).subscribe(
+			(res: any) => {
+				console.log('success')
+				groupObj.isEdit = false
+			},
+			(error) => {
+				console.log(error)
+			}
+		)
+	}
+
+	onClose(groupObj: any){
+		groupObj.isEdit = false
+	}
 }

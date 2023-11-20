@@ -21,6 +21,7 @@ export class ZoneMasterComponent {
   zoneMasterForm: any = FormGroup;
   selectedForm!: FormGroup;
   selectedZone = []
+  isLoading: boolean = true;
 
   code: number = 3000;
   length: number = NaN;
@@ -67,9 +68,15 @@ export class ZoneMasterComponent {
   }
 
   getAllParts() {
-    this.partsService.loadParts().subscribe((res: any) => {
-      this.parts = res.data.parts
-    })
+    this.partsService.loadParts().subscribe(
+      (res: any) => {
+        this.parts = res.data.parts
+        this.isLoading = false;
+      },
+      (error: any) => {
+        this.isLoading = true;
+      }
+    )
   }
 
   handleFormValue() {

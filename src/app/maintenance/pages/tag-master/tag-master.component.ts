@@ -56,6 +56,7 @@ export class TagMasterComponent {
   ngOnInit() {
     this.getAllTags()
     this.getAllUser()
+    console.log(this.isLoading)
   }
 
   ngAfterViewInit(): void {
@@ -64,15 +65,16 @@ export class TagMasterComponent {
   getAllTags() {
     this.tagsService.loadParts().subscribe((res: any) => {
       this.tags = res.data.tags
+      this.isLoading = false;
+
       this.length = res.length;
       this.code += this.length
 
       this.handleFormValue()
     },
     (error: any) => {
-      this.isLoading = false;
+      this.isLoading = true;
     }
-    
     )
   }
 

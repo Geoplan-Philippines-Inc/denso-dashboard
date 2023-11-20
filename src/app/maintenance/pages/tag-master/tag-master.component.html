@@ -31,7 +31,6 @@
   <div class="mt-3 d-flex justify-content-between">
     <div class="d-flex gap-2">
       <app-button [backgroundColor]="'lightgreen'" (click)="openLg(content)">Add</app-button>
-      <app-button [backgroundColor]="'lightyellow'" (click)="openLg(edit)" >Edit</app-button>
       <app-button [backgroundColor]="'red'" (click)="deleteTags(headsUp)">Delete</app-button>
       <app-button [backgroundColor]="'lightblue'">Access</app-button>
     </div>
@@ -57,7 +56,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngIf="!this.isLoading">
+      <tr *ngIf="this.isLoading">
         <th colspan="5">
           <div class="skeleton d-flex justify-content-center align-items-center">
             loading data..

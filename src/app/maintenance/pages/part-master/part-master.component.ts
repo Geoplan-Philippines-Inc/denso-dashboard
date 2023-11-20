@@ -71,12 +71,13 @@ export class PartMasterComponent {
 	getAllParts () { 
 		this.partsService.loadParts().subscribe((res: any) => {
 			this.parts = res.data.parts
+			this.isLoading = false;
 			this.length = res.length;
 			this.code += this.length
 			this.handleFormValue()
 		},
 		(error: any) => {
-			this.isLoading = false;
+			this.isLoading = true;
 		}
 		)
 	}

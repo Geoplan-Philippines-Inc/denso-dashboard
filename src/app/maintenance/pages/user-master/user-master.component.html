@@ -30,7 +30,6 @@
   <div class="mt-3 d-flex justify-content-between">
     <div class="d-flex gap-2">
       <app-button [backgroundColor]="'lightgreen'" (click)="openLg(content)">Add</app-button>
-      <app-button [backgroundColor]="'lightyellow'" (click)="openLg(edit)">Edit</app-button>
       <app-button [backgroundColor]="'red'" (click)="deleteZone(headsUp)">Delete</app-button>
       <app-button [backgroundColor]="'lightblue'">Access</app-button>
     </div>
@@ -59,17 +58,76 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users">
+      <tr *ngIf="this.isLoading">
+        <th colspan="8">
+            <div class="skeleton d-flex justify-content-center align-items-center">
+                loading data..
+            </div>
+        </th>
+      </tr>
+      <tr *ngFor="let user of users" class="input-row">
         <th scope="row">
           <input type="checkbox" [checked]="isSelected(user._id)" (change)="onCheckboxChange($event, user._id)">
         </th>
         <td><ngb-highlight [result]="'U0' + user.code" [term]="filter.value"></ngb-highlight></td>
-        <td><ngb-highlight [result]="user.name" [term]="filter.value"></ngb-highlight></td>
+        <td>
+          <div *ngIf="user.isEdit">
+            <input type="text" [(ngModel)]="user.name">
+          </div>
+          <div *ngIf="!user.isEdit">
+            <ngb-highlight [result]="user.name" [term]="filter.value"></ngb-highlight>
+          </div>
+        </td>
         <td><ngb-highlight [result]="user.password" [term]="filter.value"></ngb-highlight></td>
-        <td><ngb-highlight [result]="user.groupId" [term]="filter.value"></ngb-highlight></td>
-        <td><ngb-highlight [result]="user.isLeader ? 'Yes' : 'No'" [term]="filter.value"></ngb-highlight></td>
-        <td><ngb-highlight [result]="user.type" [term]="filter.value"></ngb-highlight></td>
-        <td><ngb-highlight [result]="user.email" [term]="filter.value"></ngb-highlight></td>
+        <td>
+          <div *ngIf="user.isEdit">
+            <select [(ngModel)]="user.groupId">
+              <option [value]="group.code" *ngFor="let group of groups">{{ group.code + ' / ' + group.name }}</option>
+            </select>
+          </div>
+          <div *ngIf="!user.isEdit">
+            <ngb-highlight [result]="user.groupId" [term]="filter.value"></ngb-highlight>
+          </div>
+        </td>
+        <td>
+          <div *ngIf="user.isEdit">
+            <select [(ngModel)]="user.isLeader">
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+          <div *ngIf="!user.isEdit">
+            <ngb-highlight [result]="user.isLeader ? 'Yes' : 'No'" [term]="filter.value"></ngb-highlight>
+          </div>
+        </td>
+        <td>
+          <div *ngIf="user.isEdit">
+            <select [(ngModel)]="user.type">
+              <option value="admin">Admin</option>
+              <option value="user">User</option>
+            </select>
+          </div>
+          <div *ngIf="!user.isEdit">
+            <ngb-highlight [result]="user.type" [term]="filter.value"></ngb-highlight>
+          </div>
+        </td>
+        <td>
+          <div *ngIf="user.isEdit">
+            <input type="text" [(ngModel)]="user.email">
+          </div>
+          <div *ngIf="!user.isEdit">
+            <ngb-highlight [result]="user.email" [term]="filter.value"></ngb-highlight>
+          </div>
+        </td>
+        <td class="text-center">
+          <div *ngIf="!user.isEdit" (click)="onEdit(user)">
+              <i class="bi bi-pencil-square"></i>
+          </div>
+          <div *ngIf="user.isEdit" class="d-flex justify-content-center gap-2">
+              <i class="bi bi-cloud-download" (click)="onSave(user)"></i>
+              <i class="bi bi-x-lg" (click)="onClose(user)"></i>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>
