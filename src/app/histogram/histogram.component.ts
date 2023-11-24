@@ -3,12 +3,12 @@ import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-b
 import { ChartConfiguration } from 'chart.js';
 
 @Component({
-  selector: 'app-histogram',
-  templateUrl: './histogram.component.html',
-  styleUrls: ['./histogram.component.scss']
+	selector: 'app-histogram',
+	templateUrl: './histogram.component.html',
+	styleUrls: ['./histogram.component.scss']
 })
 export class HistogramComponent {
-  isVisible: boolean = false;
+  	isVisible: boolean = false;
 	calendar = inject(NgbCalendar);
 	formatter = inject(NgbDateParserFormatter);
 
@@ -20,13 +20,38 @@ export class HistogramComponent {
 		this.isVisible = true;
 	}
 
+	ngOnInit(){
+		this.getRandom()
+	}
+
+	chartsData: number[] = [];
+
 	public barChartLegend = true;
 	public barChartPlugins = [];
+
+	getRandom(){
+		// Math.floor(Math.random() * 8);
+
+		this.chartsData = [
+
+		]
+		console.log(this.chartsData)
+	}
 
 	public barChartData: ChartConfiguration<'bar'>['data'] = {
 		labels: ['-450', '451-500', '501-550', '551-600', '601-650', '651-700', '701-750', '751-800', '801+'],
 		datasets: [{
-			data: [2, 3, 4, 7, 8, 7, 1, 1, 1],
+			data: [
+				Math.floor(Math.random() * 7) + 1,
+				Math.floor(Math.random() * 7) + 1,
+				Math.floor(Math.random() * 7) + 1,
+				Math.floor(Math.random() * 7) + 1,
+				Math.floor(Math.random() * 7) + 1,
+				Math.floor(Math.random() * 7) + 1,
+				Math.floor(Math.random() * 7) + 1,
+				Math.floor(Math.random() * 7) + 1,
+				Math.floor(Math.random() * 7) + 1
+			],
 			label: 'Actual Duration',
 			backgroundColor: 'rgba(75, 192, 192, 0.2)',
 			borderColor: 'rgb(75, 192, 192)',
@@ -47,7 +72,7 @@ export class HistogramComponent {
 		}
 	}
 
-  	isHovered(date: NgbDate) {
+	isHovered(date: NgbDate) {
 		return (
 			this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate)
 		);
@@ -65,6 +90,7 @@ export class HistogramComponent {
 			this.isHovered(date)
 		);
 	}
+
 
 	validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
 		const parsed = this.formatter.parse(input);

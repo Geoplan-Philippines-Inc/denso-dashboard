@@ -10,7 +10,7 @@ export class ZoneMasterService {
     private http:HttpClient
   ) { }
 
-  readonly zoneUrl = Constants.development.apiUrl.zone;
+  readonly zoneUrl = Constants.production.apiUrl.zone;
 
   loadParts(){
     return this.http.get(this.zoneUrl);

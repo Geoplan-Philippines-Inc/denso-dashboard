@@ -10,7 +10,7 @@ export class TagsMasterService {
     private http:HttpClient
   ) { }
 
-  readonly tagsUrl = Constants.development.apiUrl.tags;
+  readonly tagsUrl = Constants.production.apiUrl.tags;
 
   loadParts(){
     return this.http.get(this.tagsUrl);
