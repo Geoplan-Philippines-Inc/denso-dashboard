@@ -11,7 +11,7 @@ export class GroupMasterService {
     private http: HttpClient
   ) { }
 
-  readonly groupsUrl = Constants.production.apiUrl.groups;
+  readonly groupsUrl = Constants.development.apiUrl.groups;
 
   loadGroups(){
     return this.http.get(this.groupsUrl);
