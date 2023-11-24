@@ -79,7 +79,7 @@
 
     <ng-container *ngIf="isVisible">
         <div style="padding: 0 10%;">
-            <p class="fw-bold text-primary my-3 text-center">Showing Results between 2023/5/1 to 2023/5/7</p>
+            <p class="fw-bold text-primary my-3 text-center">Showing Results between {{ formatter.format(fromDate) }} to {{ formatter.format(toDate) }}</p>
             
             <canvas baseChart [data]="barChartData" [plugins]="barChartPlugins" [legend]="barChartLegend" [type]="'bar'">
             </canvas>
