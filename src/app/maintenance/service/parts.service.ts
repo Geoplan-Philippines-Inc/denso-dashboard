@@ -10,7 +10,7 @@ export class PartsService {
     private http:HttpClient
   ) { }
 
-  readonly partsUrl = Constants.production.apiUrl.parts;
+  readonly partsUrl = Constants.development.apiUrl.parts;
 
   loadParts(){
     return this.http.get(this.partsUrl);
