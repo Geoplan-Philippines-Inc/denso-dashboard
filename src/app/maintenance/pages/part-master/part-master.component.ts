@@ -1,12 +1,11 @@
-import { DecimalPipe } from '@angular/common';
+import { DecimalPipe } from '@angular/common';	
 import { Component, PipeTransform } from '@angular/core';
 import { FormArray, FormControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, map, startWith } from 'rxjs';
-import { PartMasterTableInterface } from '../../model/part-master-table-interface';
-import { PartsService } from '../../service/parts.service';
-import { PARTMASTERTABLEDATA } from '../../data/part-master-table-data';
 import { FormGroup, FormBuilder } from '@angular/forms';
+
+// service
+import { PartsService } from '../../service/parts.service';
 
 // function search(text: string, pipe: PipeTransform): PartMasterTableInterface[] {
 // 	return PARTMASTERTABLEDATA.filter((part) => {
@@ -22,7 +21,9 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 @Component({
 	selector: 'app-part-master',
 	templateUrl: './part-master.component.html',
-	styleUrls: ['./part-master.component.scss']
+	styleUrls: [
+		'./part-master.component.scss',
+	]
 })
 
 export class PartMasterComponent {
